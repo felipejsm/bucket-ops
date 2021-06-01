@@ -29,19 +29,14 @@ public class UploadObjectImpl implements UploadObject {
     public String save() {
         try {
 
-            S3Client s3Client = S3Client.builder()
-                    .endpointOverride(this.s3ClientConfig.getUri())
-                    .region(this.s3ClientConfig.getRegion())
-                    .build();
-
             PutObjectRequest putOb = PutObjectRequest.builder()
                     .bucket(this.s3ClientConfig.getBucket())
                     .key("quotes/george_and_seinfeld_cafe.png")
                     .contentType("image/jpeg")
                     .build();
 
-            PutObjectResponse response = s3Client.putObject(putOb,
-                    RequestBody.fromFile(myFile.getFile()));
+            PutObjectResponse response = this.s3ClientConfig.s3Client().putObject(putOb,
+                    RequestBody.fromFile(this.myFile.getFile()));
             return response.eTag();
         } catch(S3Exception | IOException e) {
 
