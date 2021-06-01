@@ -8,7 +8,7 @@ import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
 @Component
-public class DownloadObjectImpl implements DowloadObject {
+public class DownloadObjectImpl implements DownloadObject {
 
     private S3ClientConfig s3ClientConfig;
     private S3Client client;
