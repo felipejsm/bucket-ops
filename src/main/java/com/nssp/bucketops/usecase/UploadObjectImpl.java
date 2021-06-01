@@ -44,44 +44,5 @@ public class UploadObjectImpl implements UploadObject {
         return null;
     }
 
-    @Override
-    public List<String> list() {
-        List<String> listaDeChaves = new ArrayList<>();
-        Region region = Region.SA_EAST_1;
-        String bucketName = "seinfeld";
-        String objectKey = "quotes";
-        URI uri = URI.create("http://localhost:4566");
-
-        S3Client s3Client = S3Client.builder()
-                .endpointOverride(uri)
-                .region(region)
-                .build();
-
-        ListObjectsV2Response lista = s3Client.listObjectsV2(ListObjectsV2Request.builder()
-                .bucket(bucketName)
-                .build());
-        lista.contents().forEach(l -> listaDeChaves.add(l.key()));
-        return listaDeChaves;
-    }
-
-    @Override
-    public ResponseInputStream<GetObjectResponse>  download() {
-        Region region = Region.SA_EAST_1;
-        String bucketName = "seinfeld";
-        String objectKey = "quotes/george_and_seinfeld_cafe.png";
-        URI uri = URI.create("http://localhost:4566");
-
-        S3Client s3Client = S3Client.builder()
-                .endpointOverride(uri)
-                .region(region)
-                .build();
-        GetObjectRequest req = GetObjectRequest.builder()
-                .bucket(bucketName)
-                .key(objectKey)
-                .build();
-        ResponseInputStream<GetObjectResponse> s3Object = s3Client.getObject(req);
-        return s3Object;
-    }
-
 
 }

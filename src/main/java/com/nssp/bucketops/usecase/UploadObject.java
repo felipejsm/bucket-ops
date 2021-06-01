@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface UploadObject {
     public String save();
-    public List<String> list();
-    public ResponseInputStream<GetObjectResponse> download();
+    public
 }
